@@ -1,9 +1,14 @@
 "use client";
 
-import { Header } from "./components/header/Header";
+import MainLayout from "./components/layout/MainLayout";
 
 const Home = () => {
-  return <Header />;
+    return (
+        <>
+            <MainLayout>
+            </MainLayout>
+        </>
+    );
 };
 
 export default Home;
