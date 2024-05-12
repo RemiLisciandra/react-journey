@@ -1,4 +1,4 @@
-export const REACT_CARDS = [
+export const DataList = [
   {
     name: "JSX",
     category: "components",
