@@ -1,22 +1,37 @@
 "use client";
 
-import React from "react";
-import Link from 'next/link';
+import { usePathname, useSearchParams } from "next/navigation";
+import NavItem from "./NavItem";
 
-export const NavList = ({navList = []}) => {
-    const categories = new Set(navList.map(el => el.category));
-    const uniqueCategories = ["all", ...categories];
+export const NavList = ({ navList = [] }) => {
+  const categories = new Set(navList.map((el) => el.category));
+  const uniqueCategories = ["all", ...categories];
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  const isActive = (category) => {
+    if (category === "all") {
+      return `${pathname}?${searchParams}` === "/?";
+    }
     return (
-        <div className="flex flex-col gap-4">
-            {uniqueCategories.map(category => {
-                return (
-                    <Link className={`px-2 hover:bg-gray-200`} key={category}
-                          href={category !== "all" ? `/?filter=${encodeURIComponent(category)}` : "/"}>
-                        {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </Link>
-                );
-            })}
-        </div>
+      `/?filter=${category.toLowerCase()}` === `${pathname}?${searchParams}`
     );
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      {uniqueCategories.map((category) => (
+        <NavItem
+          key={category}
+          href={
+            category === "all"
+              ? "/"
+              : `/?filter=${encodeURIComponent(category)}`
+          }
+          isActive={isActive(category)}
+          category={category}
+        />
+      ))}
+    </div>
+  );
 };
