@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 
-const NavItem = ({ href, isActive, category }) => {
+export const NavItem = ({ href, isActive, category }) => {
   return (
     <Link
       prefetch={false}
@@ -11,5 +13,3 @@ const NavItem = ({ href, isActive, category }) => {
     </Link>
   );
 };
-
-export default NavItem;

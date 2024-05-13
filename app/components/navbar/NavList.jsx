@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import NavItem from "./NavItem";
+import { NavItem } from "./NavItem";
 
 export const NavList = ({ navList = [] }) => {
   const categories = new Set(navList.map((el) => el.category));
@@ -10,12 +10,15 @@ export const NavList = ({ navList = [] }) => {
   const searchParams = useSearchParams();
 
   const isActive = (category) => {
-    if (category === "all") {
-      return `${pathname}?${searchParams}` === "/?";
-    }
+    if (category === "all") return `${pathname}?${searchParams}` === "/?";
     return (
       `/?filter=${category.toLowerCase()}` === `${pathname}?${searchParams}`
     );
+  };
+
+  const href = (category) => {
+    if (category === "all") return "/";
+    return `/?filter=${encodeURIComponent(category)}`;
   };
 
   return (
@@ -23,11 +26,7 @@ export const NavList = ({ navList = [] }) => {
       {uniqueCategories.map((category) => (
         <NavItem
           key={category}
-          href={
-            category === "all"
-              ? "/"
-              : `/?filter=${encodeURIComponent(category)}`
-          }
+          href={href(category)}
           isActive={isActive(category)}
           category={category}
         />

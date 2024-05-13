@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "React Journey",
-  description: "First NextJS project !",
+  description: "Documentation React",
 };
 
 export default function RootLayout({ children }) {
