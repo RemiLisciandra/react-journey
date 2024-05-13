@@ -9,7 +9,7 @@ import { PlusCircle } from "lucide-react";
 import { ReactSvg } from "../logos/ReactSvg";
 import { LinkButton } from "../ui/button/LinkButton";
 
-export const Item = ({ data }) => {
+export const Item = ({ data, hideCategory = false }) => {
   return (
     <Card>
       <CardHeader>
@@ -20,7 +20,9 @@ export const Item = ({ data }) => {
       </CardHeader>
       <CardBody>{data.name}</CardBody>
       <CardFooter>
-        <p className="text-xs text-gray-400">{data.category}</p>
+        <p className="text-xs text-gray-400">
+          {hideCategory ? null : data.category}
+        </p>
         <div className="flex items-center gap-2">
           <LinkButton className="bg-gray-200" href={data.url} target="_blank">
             <BookOpenText size={15} />
